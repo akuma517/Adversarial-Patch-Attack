@@ -111,7 +111,7 @@ transform = A.Compose([
 
 counter = 0
 # Run for all the test images.
-all_images = glob.glob('/content/drive/MyDrive/Adversarial Patch/Mini Dataset/Test/*.png')
+all_images = glob.glob('/content/drive/MyDrive/Adversarial Patch/Mini Dataset/patched_test/*.png')
 #all_images = glob.glob('/content/input/gtsrb-german-traffic-sign/final_test/*.png')
 correct_count = 0
 frame_count = 0 # To count total frames.
