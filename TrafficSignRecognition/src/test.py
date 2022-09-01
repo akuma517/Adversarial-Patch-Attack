@@ -15,14 +15,14 @@ from model import build_model
 # Define computation device.
 device = 'cpu'
 # Class names.
-sign_names_df = pd.read_csv('/content/Adversarial-Patch-Attack/TrafficSignRecognition/outputs/signnames.csv')
+sign_names_df = pd.read_csv('/content/Adversarial-Patch-Attack/TrafficSignRecognition/outputs/signnames.csv',encoding= 'unicode_escape')
 class_names = sign_names_df.SignName.tolist()
 # DataFrame for ground truth.
 gt_df = pd.read_csv(
     '/content/input/gtsrb-german-traffic-sign/test_labels.csv', 
-    delimiter=';'
+    delimiter=','
 )
-gt_df = gt_df.set_index('Filename', drop=True)
+gt_df = gt_df.set_index('Id', drop=True)
 # Initialize model, switch to eval model, load trained weights.
 model = build_model(
     pretrained=False,
