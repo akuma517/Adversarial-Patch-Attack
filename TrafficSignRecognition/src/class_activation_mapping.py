@@ -85,7 +85,7 @@ def visualize_and_save_map(
     #cv2.imshow('Result', img_concat)
     #cv2.waitKey(1)
     if save_name is not None:
-        cv2.imwrite(f"/content/drive/MyDrive/Adversarial Patch/trafficSignRecognition/cam_images/test_results/CAM_{save_name}.jpg", img_concat)
+        cv2.imwrite(f"/content/drive/MyDrive/Adversarial Patch/trafficSignRecognition/cam_images/CAM_{save_name}.jpg", img_concat)
 
 # Hook the feature extractor.
 # https://github.com/zhoubolei/CAM/blob/master/pytorch_CAM.py
