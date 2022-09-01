@@ -13,7 +13,7 @@ from torch.utils.data import DataLoader, Subset
 from albumentations.pytorch import ToTensorV2
 
 # Required constants.
-ROOT_DIR = '../input/GTSRB_Final_Training_Images/GTSRB/Final_Training/Images'
+ROOT_DIR = '/content/input/gtsrb-german-traffic-sign/train'
 VALID_SPLIT = 0.1
 RESIZE_TO = 224 # Image size of resize when applying transforms.
 BATCH_SIZE = 128
