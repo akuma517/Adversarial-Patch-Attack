@@ -20,7 +20,7 @@ def save_model(epochs,model,optimizer, criterion):
             'optimizer_state_dict': optimizer.state_dict(),
             'loss': criterion,
         }, 
-        f"../outputs/model.pth"     # save the model to this location
+        f"/content/outputs/model.pth"     # save the model to this location
 
     )
 
@@ -43,7 +43,7 @@ def save_plots(train_acc, valid_acc, train_loss, valid_loss):
     plt.ylabel('Accuracy')
     plt.legend()
     #Accuracy Plots are saved at this location
-    plt.savefig(f"../outputs/accuracy.png")
+    plt.savefig(f"/content/outputs/accuracy.png")
     
     # Loss plots.
     plt.figure(figsize=(10, 7))
@@ -59,4 +59,4 @@ def save_plots(train_acc, valid_acc, train_loss, valid_loss):
     plt.ylabel('Loss')
     plt.legend()
     #Loss Plots are saved at this location
-    plt.savefig(f"../outputs/loss.png")
+    plt.savefig(f"/content/outputs/loss.png")
