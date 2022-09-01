@@ -46,7 +46,7 @@ transform = A.Compose([
     ])
 counter = 0
 # Run for all the test images.
-all_images = glob.glob('../input/GTSRB_Final_Test_Images/GTSRB/Final_Test/Images/*.png')
+all_images = glob.glob('/content/input/gtsrb-german-traffic-sign/test/*.png')
 correct_count = 0
 frame_count = 0 # To count total frames.
 total_fps = 0 # To get the final frames per second. 
@@ -83,7 +83,7 @@ for i, image_path in enumerate(all_images):
     total_fps += fps
     # Increment frame count.
     frame_count += 1
-    
+
 print(f"Total number of test images: {len(all_images)}")
 print(f"Total correct predictions: {correct_count}")
 print(f"Accuracy: {correct_count/len(all_images)*100:.3f}")
