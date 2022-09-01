@@ -70,7 +70,7 @@ for i, image_path in enumerate(all_images):
     class_idx = topk(probs, 1)[1].int()
     # Get the ground truth.
     image_name = image_path.split(os.path.sep)[-1]
-    gt_idx = gt_df.loc[image_name].ClassId
+    gt_idx = gt_df.loc[image_name].Label
     # Check whether correct prediction or not.
     if gt_idx == class_idx:
         correct_count += 1
