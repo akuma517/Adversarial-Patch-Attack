@@ -136,10 +136,11 @@ for i, image_path in enumerate(all_images):
     class_idx = topk(probs, 1)[1].int()
     # Get the ground truth.
     image_name = image_path.split(os.path.sep)[-1]
-    gt_idx = gt_df.loc[image_name].Label
+    gt_idx = None
+    ###########################gt_idx = gt_df.loc[image_name].Label
     # Check whether correct prediction or not.
-    if gt_idx == class_idx:
-        correct_count += 1
+    #########if gt_idx == class_idx:
+        ######correct_count += 1
     # Generate class activation mapping for the top1 prediction.
     CAMs = returnCAM(features_blobs[0], weight_softmax, class_idx)
     # File name to save the resulting CAM image with.
@@ -149,7 +150,7 @@ for i, image_path in enumerate(all_images):
     result = apply_color_map(CAMs, width, height, orig_image)
     visualize_and_save_map(result, orig_image, gt_idx, class_idx, save_name)
     counter += 1
-    print(f"Image: {counter} ;; Save Name : {save_name}")
+    print(f"Image: {counter} ; Save Name : {save_name}")
     # Get the current fps.
     fps = 1 / (end_time - start_time)
     # Add `fps` to `total_fps`.
