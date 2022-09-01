@@ -84,6 +84,9 @@ for i, image_path in enumerate(all_images):
     # Increment frame count.
     frame_count += 1
 
+    if counter >100:
+        break
+
 print(f"Total number of test images: {len(all_images)}")
 print(f"Total correct predictions: {correct_count}")
 print(f"Accuracy: {correct_count/len(all_images)*100:.3f}")
