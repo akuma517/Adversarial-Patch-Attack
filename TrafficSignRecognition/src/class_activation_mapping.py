@@ -61,20 +61,20 @@ def visualize_and_save_map(
     result, orig_image, gt_idx=None, class_idx=None, save_name=None
 ):
     # Put class label text on the result.
-    if class_idx is not None:
+    """ if class_idx is not None:
         cv2.putText(
             result, 
             f"Pred: {str(class_names[int(class_idx)])}", (5, 20), 
             cv2.FONT_HERSHEY_SIMPLEX, 0.55, (0, 255, 0), 2,
             cv2.LINE_AA
-        )
-    if gt_idx is not None:
+        ) """
+    """ if gt_idx is not None:
         cv2.putText(
             result, 
             f"GT: {str(class_names[int(gt_idx)])}", (5, 40), 
             cv2.FONT_HERSHEY_SIMPLEX, 0.55, (0, 255, 0), 2,
             cv2.LINE_AA
-        )
+        ) """
     # cv2.imshow('CAM', result/255.)
     orig_image = cv2.resize(orig_image, (224, 224))
     # cv2.imshow('Original image', orig_image)
@@ -85,7 +85,7 @@ def visualize_and_save_map(
     #cv2.imshow('Result', img_concat)
     #cv2.waitKey(1)
     if save_name is not None:
-        print("Writing CAM file...")
+        #print("Writing CAM file...")
         cv2.imwrite(f"/content/drive/MyDrive/Adversarial Patch/trafficSignRecognition/cam_images/CAM_{save_name}.jpg", img_concat)
 
 # Hook the feature extractor.
@@ -111,7 +111,8 @@ transform = A.Compose([
 
 counter = 0
 # Run for all the test images.
-all_images = glob.glob('/content/input/gtsrb-german-traffic-sign/final_test/*.png')
+all_images = glob.glob('/content/drive/MyDrive/Adversarial Patch/Mini Dataset/Test/*.png')
+#all_images = glob.glob('/content/input/gtsrb-german-traffic-sign/final_test/*.png')
 correct_count = 0
 frame_count = 0 # To count total frames.
 total_fps = 0 # To get the final frames per second. 
