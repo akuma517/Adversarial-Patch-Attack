@@ -1,0 +1,1 @@
+This folder will store the models, accuracy plot and loss plots.
