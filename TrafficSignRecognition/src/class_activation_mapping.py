@@ -82,8 +82,8 @@ def visualize_and_save_map(
         np.array(result, dtype=np.uint8), 
         np.array(orig_image, dtype=np.uint8)
     ])
-    cv2.imshow('Result', img_concat)
-    cv2.waitKey(1)
+    #cv2.imshow('Result', img_concat)
+    #cv2.waitKey(1)
     if save_name is not None:
         cv2.imwrite(f"/content/drive/MyDrive/Adversarial Patch/trafficSignRecognition/cam_images/test_results/CAM_{save_name}.jpg", img_concat)
 
