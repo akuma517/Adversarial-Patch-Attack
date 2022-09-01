@@ -15,14 +15,14 @@ from model import build_model
 # Define computation device.
 device = 'cpu'
 # Class names.
-sign_names_df = pd.read_csv('/content/Adversarial-Patch-Attack/TrafficSignRecognition/outputs/signnames.csv')
+sign_names_df = pd.read_csv('/content/Adversarial-Patch-Attack/TrafficSignRecognition/outputs/signnames.csv',encoding= 'unicode_escape')
 class_names = sign_names_df.SignName.tolist()
 # DataFrame for ground truth.
 gt_df = pd.read_csv(
     '/content/input/gtsrb-german-traffic-sign/test_labels.csv', 
-    delimiter=';'
+    delimiter=','
 )
-gt_df = gt_df.set_index('Filename', drop=True)
+gt_df = gt_df.set_index('Id', drop=True)
 # Initialize model, switch to eval model, load trained weights.
 model = build_model(
     pretrained=False,
@@ -85,7 +85,7 @@ def visualize_and_save_map(
     cv2.imshow('Result', img_concat)
     cv2.waitKey(1)
     if save_name is not None:
-        cv2.imwrite(f"../outputs/test_results/CAM_{save_name}.jpg", img_concat)
+        cv2.imwrite(f"/content/drive/MyDrive/Adversarial Patch/trafficSignRecognition/cam_images/test_results/CAM_{save_name}.jpg", img_concat)
 
 # Hook the feature extractor.
 # https://github.com/zhoubolei/CAM/blob/master/pytorch_CAM.py
@@ -110,7 +110,7 @@ transform = A.Compose([
 
 counter = 0
 # Run for all the test images.
-all_images = glob.glob('../input/GTSRB_Final_Test_Images/GTSRB/Final_Test/Images/*.ppm')
+all_images = glob.glob('/content/input/gtsrb-german-traffic-sign/final_test/*.png')
 correct_count = 0
 frame_count = 0 # To count total frames.
 total_fps = 0 # To get the final frames per second. 
@@ -134,7 +134,7 @@ for i, image_path in enumerate(all_images):
     class_idx = topk(probs, 1)[1].int()
     # Get the ground truth.
     image_name = image_path.split(os.path.sep)[-1]
-    gt_idx = gt_df.loc[image_name].ClassId
+    gt_idx = gt_df.loc[image_name].Label
     # Check whether correct prediction or not.
     if gt_idx == class_idx:
         correct_count += 1
