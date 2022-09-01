@@ -85,6 +85,7 @@ def visualize_and_save_map(
     #cv2.imshow('Result', img_concat)
     #cv2.waitKey(1)
     if save_name is not None:
+        print("Writing CAM file...")
         cv2.imwrite(f"/content/drive/MyDrive/Adversarial Patch/trafficSignRecognition/cam_images/CAM_{save_name}.jpg", img_concat)
 
 # Hook the feature extractor.
@@ -142,11 +143,12 @@ for i, image_path in enumerate(all_images):
     CAMs = returnCAM(features_blobs[0], weight_softmax, class_idx)
     # File name to save the resulting CAM image with.
     save_name = f"{image_path.split('/')[-1].split('.')[0]}"
+    
     # Show and save the results.
     result = apply_color_map(CAMs, width, height, orig_image)
     visualize_and_save_map(result, orig_image, gt_idx, class_idx, save_name)
     counter += 1
-    print(f"Image: {counter}")
+    print(f"Image: {counter} ;; Save Name : {save_name}")
     # Get the current fps.
     fps = 1 / (end_time - start_time)
     # Add `fps` to `total_fps`.
