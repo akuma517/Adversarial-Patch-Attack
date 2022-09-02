@@ -168,13 +168,13 @@ if __name__ == '__main__':
     # Loss function.
     criterion = nn.CrossEntropyLoss()
 
-    scheduler = None
-    """ scheduler = torch.optim.lr_scheduler.CosineAnnealingWarmRestarts(
+    #scheduler = None
+    scheduler = torch.optim.lr_scheduler.CosineAnnealingWarmRestarts(
         optimizer, 
         T_0=10, 
         T_mult=1,
         verbose=True
-    ) """
+    )
 
     # Lists to keep track of losses and accuracies.
     train_loss, valid_loss = [], []
