@@ -121,17 +121,17 @@ if __name__ == '__main__':
         image = cv2.imread(image_path) # Read image
         print(image.shape)
         new_res,_ = patch_detection(image)
-        plt.figure()
+        """ plt.figure()
         plt.subplot(1,2,1)
         plt.imshow( image)
         plt.title('Original Image') 
         plt.subplot(1,2,2)
         plt.imshow(new_res)
-        plt.show()
+        plt.show() """
+
+        out_file_name = image_path.split('/')[-1][:-4]
+        cv2.imwrite(f'{masked_path_dir_path}/{out_file_name}.png',new_res)
         break
-        
-        #out_file_name = image_path.split('/')[-1][:-4]
-        #cv2.imwrite(f'{masked_path_dir_path}/{out_file_name}.png',new_res)
   
 
 
