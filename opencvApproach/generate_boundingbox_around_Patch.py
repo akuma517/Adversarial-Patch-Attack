@@ -115,7 +115,7 @@ def patch_detection(image):
 
 if __name__ == '__main__':
     root_dir_path = '/content/drive/MyDrive/Adversarial Patch/Mini Dataset/patched_test'
-   # masked_path_dir_path = '/content/drive/MyDrive/Adversarial Patch/Mini Dataset/MaskedPatchOutput/1'
+    masked_path_dir_path = '/content/output'
     image_path_list = readImagesFromFolder(root_dir_path)
     for image_path in image_path_list:
         image = cv2.imread(image_path) # Read image
@@ -128,10 +128,10 @@ if __name__ == '__main__':
         plt.subplot(1,2,2)
         plt.imshow(new_res)
         plt.show()
-        
+        break
         
         #out_file_name = image_path.split('/')[-1][:-4]
-        # cv2.imwrite(f'{masked_path_dir_path}/{out_file_name}.png',new_res)
+        #cv2.imwrite(f'{masked_path_dir_path}/{out_file_name}.png',new_res)
   
 
 
