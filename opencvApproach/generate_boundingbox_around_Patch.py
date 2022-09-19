@@ -17,6 +17,42 @@ def readImagesFromFolder(root_dir_path):
 def maximumSum(list1):
     return(sum(max(list1, key = sum)))
 
+def combine_horizontally(images,padding=20):
+    
+    max_height = 0  # find the max height of all the images
+    total_width = 0  # the total width of the images (horizontal stacking)
+
+    image1 = images[0]
+    image2 = images[1]
+
+    image1_height = image1.shape[0]
+    image1_width = image1.shape[1]
+
+    image2_height = image2.shape[0]
+    image2_width = image2.shape[1]
+
+    if image1_height > image2_height:
+      max_height = image1_height
+    else:
+      max_height = image2_height
+
+    # add all the images widths
+    total_width = image1_width + image2_width
+
+    # create a new array with a size large enough to contain all the images
+    # also add padding size for all the images except the last one
+    final_image = np.zeros((max_height, (len(images)-1)*padding+ total_width, 3), dtype=np.uint8)
+
+    current_x = 0  # keep track of where your current image was last placed in the x coordinate
+    for image in images:
+        # add an image to the final array and increment the x coordinate
+        height = image.shape[0]
+        width = image.shape[1]
+        final_image[:height,current_x :width+current_x, :] = image
+        #add the padding between the images
+        current_x += width+padding
+
+    return final_image
 
 def patch_detection(image):
 
@@ -65,7 +101,7 @@ def patch_detection(image):
   #Find the bbox around the portion where the ADVERSARIAL PATCH was.
   #Threshold value based on the adjusted grayscale image
   (T, threshInv) = cv2.threshold(img, 80, 255, cv2.THRESH_BINARY_INV | cv2.THRESH_OTSU)
-  print("[INFO] otsu's thresholding value: {}".format(T))
+  #print("[INFO] otsu's thresholding value: {}".format(T))
 
 
   img_gray = cv2.cvtColor(new_res, cv2.COLOR_BGR2GRAY)
@@ -93,45 +129,35 @@ def patch_detection(image):
             h=w
             cv2.rectangle(out_img, (x, y), (x + w, y + h), (128, 128, 128), -1)
             print(f'From ELSE LOOP : Height: {h} , Width: {w}')
-    
-    
-
-
-    # if h in list(range(expected_patch_height_lowerlimit,expected_patch_height_upperlimit)):
-    #     if w in list(range(expected_patch_width_lowerlimit, expected_patch_width_upperlimit)):
-    #       if w>h:
-    #         w=h
-    #         cv2.rectangle(out_img, (x, y), (x + w, y + h), (128, 128, 128), -1)
-    #         print(f'From IF LOOP : Height: {h} , Width: {w}')
-    #       else:
-    #         h=w
-    #         cv2.rectangle(out_img, (x, y), (x + w, y + h), (128, 128, 128), -1)
-    #         print(f'From ELSE LOOP : Height: {h} , Width: {w}')
-      #cv2.rectangle(out_img, (x, y), (x + 14, y + 14), (128, 128, 128), -1)
-      
-
+       
   return out_img,  (x, y, w, h)
 
 
 if __name__ == '__main__':
-    root_dir_path = '/content/drive/MyDrive/Adversarial Patch/Mini Dataset/patched_test'
+    root_dir_path = '/content/drive/MyDrive/Adversarial Patch/Patched_Full_Dataset'
     masked_path_dir_path = '/content/output'
     image_path_list = readImagesFromFolder(root_dir_path)
+
+    counter = 0
+
     for image_path in image_path_list:
         image = cv2.imread(image_path) # Read image
         print(image.shape)
         new_res,_ = patch_detection(image)
-        """ plt.figure()
-        plt.subplot(1,2,1)
-        plt.imshow( image)
-        plt.title('Original Image') 
-        plt.subplot(1,2,2)
-        plt.imshow(new_res)
-        plt.show() """
+
+        images = []
+        images.append(image)
+        images.append(new_res)
+
+        final_image=combine_horizontally(images,padding=0)
 
         out_file_name = image_path.split('/')[-1][:-4]
-        cv2.imwrite(f'{masked_path_dir_path}/{out_file_name}.png',new_res)
-        break
+        cv2.imwrite(f'{masked_path_dir_path}/{out_file_name}.png',final_image)
+        if counter >10:
+          break
+        else:
+          counter = counter + 1
+        
   
 
 
